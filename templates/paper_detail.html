@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+        font-family: 'Times New Roman', 'Arial', sans-serif;
+        color: #333;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        font-size: 16px;
+        }
+
+        /* Paper Container */
+        .paper-container {
+            background-color: #fff;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Paper Title */
+        .paper-title {
+            color: #620404;
+            margin-bottom: 20px;
+        }
+
+        /* Paper Content General Styling */
+        .paper-content {
+            margin-bottom: 20px;
+        }
+
+        .paper-content strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        /* Styling for Keywords */
+        .paper-keywords {
+            background-color: #e7f1ff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 2px 8px;
+            margin-right: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        /* Notes Section */
+        .paper-notes {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .paper-notes h3 {
+            margin-top: 0;
+        }
+
+        .paper-notes textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+
+        .paper-notes button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .paper-notes button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Update Summary Button */
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+        <div class="paper-container">
+            <h1 class="paper-title">{{ paper.paper_name }}</h1>
+             <div class="paper-content">
+                <strong>KEYWORDS:</strong>
+                <div> <!-- Wrap keywords in a div for better control -->
+                    {% for keyword in paper.key_words %}
+                    <span class="paper-keywords">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="paper-content">
+                <strong>ABSTRACT:</strong>
+                <p>{{ paper.paper_abstract |safe }}</p>
+            </div>
+            <div class="paper-content">
+                <strong>PROBLEM SUMMARY:</strong>
+                <p>{{ paper.problem_summary | safe }}</p>
+            </div>
+            <div class="paper-content">
+                <strong>METHODOLOGY SUMMARY:</strong>
+                <p>{{ paper.methodology_summary | safe }}</p>
+            </div>
+            <div class="paper-content">
+                <strong>RESULTS SUMMARY:</strong>
+                <p>{{ paper.result_summary | safe }}</p>
+            </div>
+            <div class="paper-content">
+                <strong>UNIQUE CONTRIBUTIONS & OTHERS SUMMARY:</strong>
+                <p>{{ paper.contributions_summary | safe }}</p>
+            </div>
+            <div class="paper-content">
+                <strong>LINK:</strong>
+                <a href="{{ paper.paper_url }}" target="_blank">{{ paper.paper_url }}</a>
+            </div>
+             <div class="paper-content">
+                <strong>YOUR NOTES:</strong>
+                <p>{{ paper.user_notes | safe }}</p>
+            </div>
+            <div class="paper-notes">
+                <h3>Edit Notes:</h3>
+                <form action="{{ url_for('add_notes', paper_id=paper.id) }}" method="post">
+                    <textarea name="notes" placeholder="Enter your notes here..."></textarea>
+                    <button type="submit">Update Notes</button>
+                </form>
+            </div>
+            <button onclick="window.location='{{ url_for('paper_update', paper_id=paper.id) }}';">Update Summary</button>
+        </div>
+</body>
+</html>

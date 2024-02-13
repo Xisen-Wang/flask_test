@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Content</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .resume-folder {
+            margin-bottom: 20px;
+        }
+        .generation-item {
+            margin-left: 20px;
+            list-style-type: none;
+        }
+        .generation-item a {
+            text-decoration: none;
+            color: #333;
+        }
+        .generation-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generated Content by Resume</h1>
+    {% for resume, generations in data_structure.items() %}
+        <div class="resume-folder">
+            <h2>{{ resume }}</h2>
+            {% for generation_name, files in generations.items() %}
+                <div class="generation-folder">
+                    <h3>{{ generation_name }}</h3>
+                    <ul>
+                        {% for file in files %}
+                            <li><a href="{{ url_for('static', filename=resume + '/' + generation_name + '/' + file) }}">{{ file }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</body>
+</html>

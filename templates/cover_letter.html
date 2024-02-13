@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cover Letter Generator 9.26-Ver</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM fully loaded and parsed");
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function() {
+                document.getElementById("loading").style.display = "block";
+            });
+            const wordCountFields = document.querySelectorAll('[data-wordcount]');
+            wordCountFields.forEach((field) => {
+                field.addEventListener("input", function() {
+                    const wcDiv = document.getElementById(field.id + '-wordcount');
+                    const wordCount = field.value.split(/\s/).filter(Boolean).length;
+                    wcDiv.innerText = "Word Count: " + wordCount;
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #loading {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            left: 50%;
+            top: 50%;
+        }
+        select.form-control{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="my-4">Cover Letter Generator 9.26-Ver</h1>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/cover_letter" method="post">
+        <label for="option">Choose an option:</label>
+        <select name="option" id="option">
+            <option value="existing">Use existing resume</option>
+        </select>
+        <label for="name">Select an existing resume:</label>
+        <select name="name" id="name" class="form-control">
+            {% for name in available_resumes %}
+                <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+        <div class="form-group">
+            <label for="job_title">Job Title:</label>
+            <input type="text" id="job_title" name="job_title" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="job_desc">Job Description:</label>
+            <textarea id="job_desc" name="job_desc" class="form-control" rows="4" required data-wordcount></textarea>
+        </div>
+        <div class="form-group">
+            <label for="company_culture">Company Culture:</label>
+            <textarea id="company_culture" name="company_culture" class="form-control" rows="4" required data-wordcount></textarea>
+            <div id="company_culture-wordcount"></div>
+        </div>
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <select name="model" id="model" class="form-control">
+                <option value="gpt-3.5-turbo">Standard</option>
+                <option value="gpt-4">Prime</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="word_limit">Word Limit:</label>
+            <input type="text" id="word_limit" name="word_limit" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="special_pref">Special Preferences:</label>
+            <input type="text" id="special_pref" name="special_pref" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Generate Cover Letter" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+
+<div id="loading">
+    <h2>Loading...</h2>
+    <!-- You can add animations or fun facts here -->
+</div>
+
+</body>
+</html>

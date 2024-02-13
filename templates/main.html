@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minimalist Job Assistance Portal</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .group {
+            text-align: center;
+            position: relative;
+            border-right: 2px solid #ddd;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        /* Removing the border from the last group */
+        .group:last-of-type {
+            border-right: none;
+        }
+
+        .group h2 {
+            cursor: pointer;
+            margin-bottom: 5px; /* Reduce space between h2 and dropdown */
+            padding: 10px 0; /* Padding to increase hoverable area */
+            transition: color 0.2s ease;
+        }
+
+        .group h2:hover {
+            color: darkred;
+        }
+
+        /* Dropdown menu styling */
+        .dropdown {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0; /* Ensure dropdown is not wider than the parent */
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1;
+        }
+
+        /* Show dropdown when hovering over the group */
+        .group:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            background-color: #FFF;
+            position: absolute;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="group">
+        <h2>Boost Careers</h2>
+        <div class="dropdown">
+            <a href="{{ url_for('cover_letter_ver1') }}">Cover Letter First Time</a>
+            <a href="{{ url_for('cover_letter') }}">Cover Letter Generation</a>
+            <a href="{{ url_for('application_questions') }}">Application Question Responding</a>
+        </div>
+    </div>
+
+    <div class="group">
+        <h2>Your Resources</h2>
+        <div class="dropdown">
+            <a href="{{ url_for('resource_finding') }}">Resource Center</a>
+            <a href="{{ url_for('show_content') }}">Past Generations</a>
+            <a href="{{ url_for('resume_builder') }}">Build Your Resume</a>
+        </div>
+    </div>
+
+    <div class="group">
+        <h2>Explore Academics</h2>
+        <div class="dropdown">
+            <a href="{{ url_for('research_interest') }}">Build Research Interest</a>
+            <a href="{{ url_for('paper_reading') }}">Paper Reading</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Jan 26th Xisen's Portal. All rights reserved.</p>
+        <img alt="今日诗词" src="https://v2.jinrishici.com/one.svg" style="max-width:100%; display: block; margin: 0 auto;">
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Content by Resume</title>
+    <!-- Include your CSS here -->
+</head>
+<body>
+    <h1>Generated Content by Resume</h1>
+    <ul>
+        {% for folder in user_folders %}
+            <li><a href="{{ url_for('show_folder', folder_name=folder) }}">{{ folder }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

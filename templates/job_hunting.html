@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Hunter</title>
+</head>
+<body>
+    <h1>Find Your Job</h1>
+    <form method="post">
+        <input type="text" name="keyword" placeholder="Enter keywords" required>
+        <button type="submit">Search Jobs</button>
+    </form>
+    <div>
+        {% for job in jobs %}
+        <div class="job">
+            <h2><a href="{{ job.url }}" target="_blank">{{ job.title }}</a></h2>
+            <p>Salary: {{ job.salary }}</p>
+            <p>Location: {{ job.location }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>

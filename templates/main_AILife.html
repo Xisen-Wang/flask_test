@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whizbang Job Assistance Portal</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.5s;
+        }
+
+        body:hover {
+            background-color: #222;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 80%;
+            border-bottom: 2px solid #555;
+            padding-bottom: 10px;
+            font-size: 4em;
+        }
+
+        #menu, #user-menu {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 80%;
+            transition: transform 0.5s;
+        }
+
+        #menu:hover, #user-menu:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.31415s, transform 0.31415s;
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        #user-status {
+            margin-top: 20px;
+            text-align: center;
+            width: 80%e;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI For Life | 找到真正的自己</h1>
+    <!-- Hiding it
+    <div id="user-status">
+        {% if session['user'] %}
+            Logged in as {{ session['user']['username'] }} | <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
+     -->
+    <div id="menu">
+        <a href="{{ url_for('cover_letter_ver1') }}"><button> Cover Letter First Time</button></a>
+        <a href="{{ url_for('resume_builder') }}"><button> Build Your Resume</button></a>
+        <a href="{{ url_for('cover_letter') }}"><button>Cover Letter Generation</button></a>
+        <a href="{{ url_for('resume_tailoring') }}"><button>Resume Tailoring</button></a>
+        <a href="{{ url_for('application_questions') }}"><button>Application Question Responding</button></a>
+        <a href="{{ url_for('job_hunting') }}"><button>Job Hunting</button></a>
+        <a href="{{ url_for('resource_finding') }}"><button>Resource Center</button></a>
+        <a href="{{ url_for('user_guide') }}"><button>User Guide & Pricing</button></a>
+    </div>
+    {% if session['user'] and session['user']['is_prime'] %}
+    <div id="user-menu">
+        <!-- Prime user features can go here -->
+    </div>
+    {% endif %}
+</body>
+</html>

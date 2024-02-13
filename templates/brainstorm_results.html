@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainstorming Session Results</title>
+    <link rel="stylesheet" href="static/Styles/paper_detail_style.css">
+</head>
+<body>
+    <h1>Brainstorming Session Results</h1>
+    <!-- Placeholder for each brainstorming comparison result -->
+        <section id="brainstorm-results">
+        {% if brainstormed_ideas %}
+        <article>
+            <h2>Brainstorming Ideas</h2>
+            <p>{{ brainstormed_ideas | safe}}</p>
+        </article>
+        {% else %}
+        <p>No results to display. Please select some papers and try brainstorming again. 你太着急啦 </p>
+        {% endif %}
+    </section>
+</body>
+</html>

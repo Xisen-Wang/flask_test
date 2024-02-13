@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contents of {{ folder_name }}</title>
+    <!-- Include your CSS here -->
+</head>
+<body>
+    <h1>Contents of {{ folder_name }}</h1>
+    {% for subfolder, files in folder_contents.items() %}
+        <h2>{{ subfolder }}</h2>
+        <ul>
+            {% for file in files %}
+                <li>{{ file }}</li>  <!-- Modify this to add links to view the file if necessary -->
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{{ url_for('show_content') }}">Back to All Folders</a>
+</body>
+</html>

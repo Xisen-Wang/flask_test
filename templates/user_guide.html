@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whizbang Job Assistance Portal - User Guide & Q&A</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.5s;
+        }
+
+        body:hover {
+            background-color: #222;
+        }
+
+        container {
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        h1, h2 {
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            font-size: 2em;
+        }
+
+        h1:after, h2:after {
+            content: '';
+            display: block;
+            margin: 10px auto 20px;
+            width: 50%;
+            height: 2px;
+            background-color: #555;
+        }
+
+        p, ul {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: auto;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.31415s, transform 0.31415s;
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #accordion {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #555;
+            cursor: pointer;
+        }
+
+        .accordion-item-header {
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .accordion-item-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        .accordion-item.open .accordion-item-body {
+            max-height: 10em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Guide</h1>
+        <p>Welcome to our User Guide! Here you'll find instructions on how to use each section of our website.</p>
+
+        <!-- Detailed Instructions for each section -->
+        <h2>Creating a Resume</h2>
+        <p>To create a resume, click on the 'Build Your Resume' button on the main page. Fill in the form with your education, experiences, skills, and other relevant information, then click 'Save'.</p>
+
+        <h2>Generating a Cover Letter</h2>
+        <p>Click the 'Cover Letter Generation' button on the main page, choose an existing resume or create a new one, fill in the job and company details, and voila! Your tailored cover letter will be ready for download.</p>
+
+        <h2>Tailoring Your Resume</h2>
+        <p>If you want to tailor your resume for a specific job, click on 'Resume Tailoring'. Here you can tweak your resume to better fit the job you're eyeing.</p>
+
+        <h2>Responding to Application Questions</h2>
+        <p>Click on 'Application Question Responding', choose a resume, and fill in the application question details. This function will help you craft a compelling answer to common application questions.</p>
+
+        <h2>Job Hunting</h2>
+        <p>Ready to hunt some jobs? Click 'Job Hunting', enter your desired job keywords, and explore the list of job opportunities that pop up.</p>
+
+        <h2>Resource Center</h2>
+        <p>In the 'Resource Center', you can store and view links to job portals. It's your little corner of resources for the job hunt journey.</p>
+
+        <h2>Q&A</h2>
+        <div id="accordion">
+            <div class="accordion-item">
+                <div class="accordion-item-header" onclick="toggleAccordion(this)">
+                    How do I create a resume?
+                </div>
+                <div class="accordion-item-body">
+                    <p>Click on 'Build Your Resume' button on the main page, and follow the instructions provided.</p>
+                </div>
+            </div>
+            <!-- More questions and answers can be added here -->
+        </div>
+
+        <a href="{{ url_for('main') }}"><button>Back to Main</button></a>
+    </div>
+
+    <script>
+        function toggleAccordion(element) {
+            var itemBody = element.nextElementSibling;
+            if (itemBody.style.maxHeight) {
+                itemBody.style.maxHeight = null;
+                element.parentElement.classList.remove("open");
+            } else {
+                itemBody.style.maxHeight = itemBody.scrollHeight + "px";
+                element.parentElement.classList.add("open");
+            }
+        }
+    </script>
+</body>
+</html>

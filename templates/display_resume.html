@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Resume</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="my-4">Generated Resume</h1>
+    <div class="card">
+        <div class="card-header">
+            Resume
+        </div>
+        <div class="card-body">
+            <pre>{{ name|safe }}</pre>
+        </div>
+        <div class="card-body">
+            <pre>{{ full_resume|safe }}</pre>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

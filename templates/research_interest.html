@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Research Statement Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("DOM fully loaded and parsed");
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function() {
+                document.getElementById("loading").style.display = "block";
+            });
+            const wordCountFields = document.querySelectorAll('[data-wordcount]');
+            wordCountFields.forEach((field) => {
+                field.addEventListener("input", function() {
+                    const wcDiv = document.getElementById(field.id + '-wordcount');
+                    const wordCount = field.value.split(/\s/).filter(Boolean).length;
+                    wcDiv.innerText = "Word Count: " + wordCount;
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #loading {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            left: 50%;
+            top: 50%;
+        }
+        select.form-control, input.form-control, textarea.form-control {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="my-4">Research Statement Generator Jan 18th Ver</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/research_interest" method="POST">
+        <label for="option">Choose an option:</label>
+        <select name="option" id="option">
+            <option value="existing">Use existing resume</option>
+        </select>
+        <label for="name">Select an existing resume:</label>
+        <select name="name" id="name" class="form-control">
+            {% for name in available_resumes %}
+                <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+        <div class="form-group">
+            <label for="lab_name">Name of Lab/Programme/Professor:</label>
+            <textarea id="lab_name" name="lab_name" rows="1" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="lab_description">Lab/Programme Description:</label>
+            <textarea id="lab_description" name="lab_description" rows="4" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="professor_description">Professor Description:</label>
+            <textarea id="professor_description" name="professor_description" rows="4" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="recent_work">Recent Work from Professor:</label>
+            <textarea id="recent_work" name="recent_work" rows="4" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <select name="model" id="model" class="form-control">
+                <option value="gpt-3.5-turbo">Standard</option>
+                <option value="gpt-4">Prime</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="word_limit">Word Limit:</label>
+            <input type="text" id="word_limit" name="word_limit" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="special_pref">Special Preferences:</label>
+            <input type="text" id="special_pref" name="special_pref" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<div id="loading">
+    <h2>Loading...</h2>
+</div>
+
+</body>
+</html>
